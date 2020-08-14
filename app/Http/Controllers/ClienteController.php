@@ -13,7 +13,11 @@ class ClienteController extends Controller
         $token = $request->header('Authorization');
 
         $usuario = Usuarios::all();
-
+        foreach($usuario as $key => $value){
+            if("Basic ".base64_encode($value['id_usuario'].":".$value['llave_secreta']) == $token){
+                
+            }
+        }
         $cliente = Cliente::all();
 
         $json = array(
