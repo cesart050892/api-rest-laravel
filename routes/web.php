@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 /* Route::get('/', 'UsuariosController@index');  */
 Route::resource('/', 'UsuariosController');
-Route::resource('/registro', 'UsuariosController'); 
+Route::resource('/registro', 'UsuariosController');
+Route::resource('/clientes', 'ClienteController'); 
 
 
