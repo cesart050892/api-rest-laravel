@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-use app\Usuarios;
-
+use App\Usuarios;
 class UsuariosController extends Controller
 {
     //Metodos Http
@@ -35,7 +34,7 @@ class UsuariosController extends Controller
 
         if ($validator->fails()) {
             $json = array(
-                "Registros"=>"No validos"
+                "Datos"=>"No validos"
             );
             return json_encode($json,true);
         }else{
