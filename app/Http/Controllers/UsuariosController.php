@@ -58,17 +58,32 @@ class UsuariosController extends Controller
                 return $json;
             } else {
 
+                $id = Hash::make($datos['nombre'] . $datos['apellido'] . $datos['correo']);
+                $llave = Hash::make($datos['correo'] . $datos['apellido'] . $datos['nombre'], ['rounds' => 12,]);
+
+                $id_usuario = str_replace('$','a',$id);
+                $llave_secreta = str_replace('$','o',$llave);
+
                 $usuario = new Usuarios();
                 $usuario->nombre = $datos['nombre'];
                 $usuario->apellido = $datos['apellido'];
                 $usuario->correo = $datos['correo'];
-                $usuario->id_usuario = Hash::make($datos['nombre'] . $datos['apellido'] . $datos['correo']);
-                $usuario->llave_secreta = Hash::make($datos['correo'] . $datos['apellido'] . $datos['nombre'], ['rounds' => 12,]);
+                $usuario->id_usuario = $id_usuario;
+                $usuario->llave_secreta = $llave_secreta;
 
                 $usuario->save();
 
                 $json = array(
-                    "Registros" => "Guardados!"
+                    "Registros" => "Guardados!",
+                    'Usuario' => [
+                        'nombre' => $datos['nombre'],
+                        'apellido' => $datos['apellido'],
+                        'correo' => $datos['correo'],
+                    ],
+                    "Credenciales" => [
+                        'id_usuario' => $id_usuario,
+                        'llave_secreta' => $llave_secreta
+                    ]
                 );
                 //return json_encode($json, true);
                 return $json;

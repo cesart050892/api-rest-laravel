@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cliente;
+use App\Usuarios;
 
 class ClienteController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $token = $request->header('Authorization');
+
+        $usuario = Usuarios::all();
 
         $cliente = Cliente::all();
 
